@@ -223,17 +223,111 @@ class Attribute:
 
 class attr:
     @staticmethod
+    def bool(
+        default: bool = False,
+        doc: str = "",
+        mandatory: bool = False,
+    ) -> Attribute: ...
+
+    @staticmethod
+    def int(
+        default: int = 0,
+        doc: str = "",
+        mandatory: bool = False,
+        values: Sequence[int] = [],
+    ) -> Attribute: ...
+
+    @staticmethod
+    def int_list(
+        mandatory: bool = False,
+        non_empty: bool = False,
+        allow_empty: bool = True,
+        *,
+        default: Sequence[int] = [],
+        doc: str = "",
+    ) -> Attribute: ...
+
+    @staticmethod
+    def bool(
+            default: bool = False,
+    ) -> Attribute: ...
+
+    @staticmethod
     def label(
         default: Union[Label, str] = "",
+        doc: str = "",
         executable: bool = False,
+        allow_files: Union[bool, Sequence[str]] = bool,
+        allow_single_file: Union[bool, Sequence[str]] = bool,
         mandatory: bool = False,
-        providers: Sequence[Any] = [],
+        providers: Union[Sequence[Sequence[Provider]], Sequence[Provider]] = [],
         cfg: str = "target",
+    ) -> Attribute: ...
+
+    @staticmethod
+    def label_keyed_string_dict(
+        allow_empty: bool = True,
+        default: Dict[Label, str] = {},
+        doc: str = "",
+        allow_files: Union[bool, Sequence[str]] = bool,
+        providers: Union[Sequence[Sequence[Provider]], Sequence[Provider]] = [],
+        mandatory: bool = False,
+        cfg: str = "target",
+    ) -> Attribute: ...
+
+    @staticmethod
+    def label_list(
+        allow_empty: bool = True,
+        default: Sequence[Union[Label, str]] = []
+        doc: str = "",
+        allow_files: Union[bool, Sequence[str]] = bool,
+        providers: Union[Sequence[Sequence[Provider]], Sequence[Provider]] = [],
+        mandatory: bool = False,
+        cfg: str = "target",
+    ) -> Attribute: ...
+
+    @staticmethod
+    def output(
+        doc: str = "",
+        mandatory: bool = False,
+    ) -> Attribute: ...
+
+    @staticmethod
+    def output_list(
+        allow_empty: bool = True,
+        doc: str = "",
+        mandatory: bool = False,
     ) -> Attribute: ...
 
     @staticmethod
     def string(
         default: str = "",
+        doc: str = "",
+        mandatory: bool = False,
+        values: Sequence[str] = [],
+    ) -> Attribute: ...
+
+    @staticmethod
+    def string_dict(
+        allow_empty: bool = True,
+        default: Dict[str, str] = {},
+        doc: str = "",
+        mandatory: bool = False,
+    ) -> Attribute: ...
+
+    @staticmethod
+    def string_list(
+        mandatory: bool = False,
+        allow_empty: bool = True,
+        default: Sequence[str] = [],
+        doc: str = "",
+    ) -> Attribute: ...
+
+    @staticmethod
+    def string_list_dict(
+        allow_empty: bool = True,
+        default: Dict[str, List[str]] = {},
+        doc: str = "",
         mandatory: bool = False,
     ) -> Attribute: ...
 
