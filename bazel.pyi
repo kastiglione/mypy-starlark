@@ -1,4 +1,4 @@
-from typing import Any, Callable, List, Dict, Optional, Union, TypeVar, Generic, Sequence
+from typing import Any, Callable, List, Dict, Union, TypeVar, Generic, Sequence
 
 
 def load(
@@ -29,11 +29,11 @@ class root:
 class depset(Generic[T]):
     def __init__(
         self,
-        items: Sequence[T] = [],
-        order: str = "default",
+        items: Sequence[T] = ...,
+        order: str = ...,
         *,
-        direct: Sequence[T] = [],
-        transitive: Sequence[depset[T]] = [],
+        direct: Sequence[T] = ...,
+        transitive: Sequence[depset[T]] = ...,
     ) -> None: ...
 
     def to_list(self) -> List[T]: ...
@@ -51,14 +51,14 @@ class Actions:
     def declare_directory(
         filename: str,
         *,
-        sibling: Optional[File] = None,
+        sibling: File = ...,
     ) -> File: ...
 
     @staticmethod
     def declare_file(
         filename: str,
         *,
-        sibling: Optional[File] = None,
+        sibling: File = ...,
     ) -> File: ...
 
     @staticmethod
@@ -72,42 +72,42 @@ class Actions:
         template: File,
         output: File,
         substitutions: Dict[str, str],
-        is_executable: bool = False,
+        is_executable: bool = ...,
     ) -> None: ...
 
     @staticmethod
     def run(
         outputs: Sequence[File],
-        inputs: Union[Sequence[File], depset[File]] = [],
-        executable: Union[File, str] = "",
-        tools: Union[Sequence[File], depset[File]] = [],
-        arguments: Union[Sequence[str], Args] = [],
-        mnemonic: str = "",
-        progress_message: str = "",
-        use_default_shell_env: bool = False,
-        env: Dict[str, str] = {},
-        execution_requirements: Dict[str, str] = {},
+        inputs: Union[Sequence[File], depset[File]] = ...,
+        executable: Union[File, str] = ...,
+        tools: Union[Sequence[File], depset[File]] = ...,
+        arguments: Union[Sequence[str], Args] = ...,
+        mnemonic: str = ...,
+        progress_message: str = ...,
+        use_default_shell_env: bool = ...,
+        env: Dict[str, str] = ...,
+        execution_requirements: Dict[str, str] = ...,
     ) -> None: ...
 
     @staticmethod
     def run_shell(
         outputs: Sequence[File],
-        inputs: Union[Sequence[File], depset[File]] = [],
-        tools: Union[Sequence[File], depset[File]] = [],
-        arguments: Union[Sequence[str], Args] = [],
-        mnemonic: str = "",
+        inputs: Union[Sequence[File], depset[File]] = ...,
+        tools: Union[Sequence[File], depset[File]] = ...,
+        arguments: Union[Sequence[str], Args] = ...,
+        mnemonic: str = ...,
         command: Sequence[str],
-        progress_message: str = "",
-        use_default_shell_env: bool = False,
-        env: Dict[str, str] = {},
-        execution_requirements: Dict[str, str] = {},
+        progress_message: str = ...,
+        use_default_shell_env: bool = ...,
+        env: Dict[str, str] = ...,
+        execution_requirements: Dict[str, str] = ...,
     ) -> None: ...
 
     @staticmethod
     def write(
         output: File,
         content: Union[str, Args],
-        is_executable: bool = False,
+        is_executable: bool = ...,
     ) -> None: ...
 
 
@@ -124,10 +124,10 @@ class Ctx:
     var: Dict[str, str]
 
     def runfiles(
-        files: Sequence[File] = [],
-        transitive_files: depset[File] = depset([]),
-        collect_data: bool = False,
-        collect_default: bool = False,
+        files: Sequence[File] = ...,
+        transitive_files: depset[File] = ...,
+        collect_data: bool = ...,
+        collect_default: bool = ...,
     ) -> runfiles: ...
 
 
@@ -144,10 +144,10 @@ class DefaultInfo(Provider):
     def __init__(
         self,
         files: depset[File],
-        runfiles: Optional[runfiles] = None,
-        data_runfiles: Optional[runfiles] = None,
-        default_runfiles: Optional[runfiles] = None,
-        executable: Optional[File] = None,
+        runfiles: runfiles = ...,
+        data_runfiles: runfiles = ...,
+        default_runfiles: runfiles = ...,
+        executable: File = ...,
     ) -> None: ...
 
     files: depset[File]
@@ -170,36 +170,36 @@ class Rule:
     pass
 
 
-def fail(msg: str, attr: Optional[str] = None) -> None: ...
+def fail(msg: str, attr: str = ...) -> None: ...
 
 
 def provider(
-    doc: str = "",
+    doc: str = ...,
     *,
-    fields: Union[Sequence[str], Dict[str, str]] = [],
+    fields: Union[Sequence[str], Dict[str, str]] = ...,
 ) -> Provider: ...
 
 
-def select(x: Dict[str, Any], no_match_error: str = "") -> Any: ...
+def select(x: Dict[str, Any], no_match_error: str = ...) -> Any: ...
 
 
 def rule(
     implementation: Callable[[Any], List[Provider]],
-    test: bool = False,
-    attrs: Dict[str, Attribute] = {},
-    outputs: Dict[str, str] = {},
-    executable: bool = False,
-    output_to_genfiles: bool = False,
-    fragments: List[str] = [],
-    host_fragments: List[str] = [],
-    _skylark_testable: bool = False,
-    toolchains: List[str] = [],
-    doc: str = "",
+    test: bool = ...,
+    attrs: Dict[str, Attribute] = ...,
+    outputs: Dict[str, str] = ...,
+    executable: bool = ...,
+    output_to_genfiles: bool = ...,
+    fragments: List[str] = ...,
+    host_fragments: List[str] = ...,
+    _skylark_testable: bool = ...,
+    toolchains: List[str] = ...,
+    doc: str = ...,
     *,
-    provides: Sequence[Provider] = [],
-    execution_platform_constraints_allowed: bool = False,
-    exec_compatible_with: Sequence[str] = [],
-    cfg: Optional[str] = None,
+    provides: Sequence[Provider] = ...,
+    execution_platform_constraints_allowed: bool = ...,
+    exec_compatible_with: Sequence[str] = ...,
+    cfg: str = ...,
 ) -> Rule: ...
 
 
@@ -224,111 +224,111 @@ class Attribute:
 class attr:
     @staticmethod
     def bool(
-        default: bool = False,
-        doc: str = "",
-        mandatory: bool = False,
+        default: bool = ...,
+        doc: str = ...,
+        mandatory: bool = ...,
     ) -> Attribute: ...
 
     @staticmethod
     def int(
-        default: int = 0,
-        doc: str = "",
-        mandatory: bool = False,
-        values: Sequence[int] = [],
+        default: int = ...,
+        doc: str = ...,
+        mandatory: bool = ...,
+        values: Sequence[int] = ...,
     ) -> Attribute: ...
 
     @staticmethod
     def int_list(
-        mandatory: bool = False,
-        non_empty: bool = False,
-        allow_empty: bool = True,
+        mandatory: bool = ...,
+        non_empty: bool = ...,
+        allow_empty: bool = ...,
         *,
-        default: Sequence[int] = [],
-        doc: str = "",
+        default: Sequence[int] = ...,
+        doc: str = ...,
     ) -> Attribute: ...
 
     @staticmethod
     def bool(
-            default: bool = False,
+            default: bool = ...,
     ) -> Attribute: ...
 
     @staticmethod
     def label(
-        default: Union[Label, str] = "",
-        doc: str = "",
-        executable: bool = False,
-        allow_files: Union[bool, Sequence[str]] = bool,
-        allow_single_file: Union[bool, Sequence[str]] = bool,
-        mandatory: bool = False,
-        providers: Union[Sequence[Sequence[Provider]], Sequence[Provider]] = [],
-        cfg: str = "target",
+        default: Union[Label, str] = ...,
+        doc: str = ...,
+        executable: bool = ...,
+        allow_files: Union[bool, Sequence[str]] = ...,
+        allow_single_file: Union[bool, Sequence[str]] = ...,
+        mandatory: bool = ...,
+        providers: Union[Sequence[Sequence[Provider]], Sequence[Provider]] = ...,
+        cfg: str = ...,
     ) -> Attribute: ...
 
     @staticmethod
     def label_keyed_string_dict(
-        allow_empty: bool = True,
-        default: Dict[Label, str] = {},
-        doc: str = "",
-        allow_files: Union[bool, Sequence[str]] = bool,
-        providers: Union[Sequence[Sequence[Provider]], Sequence[Provider]] = [],
-        mandatory: bool = False,
-        cfg: str = "target",
+        allow_empty: bool = ...,
+        default: Dict[Label, str] = ...,
+        doc: str = ...,
+        allow_files: Union[bool, Sequence[str]] = ...,
+        providers: Union[Sequence[Sequence[Provider]], Sequence[Provider]] = ...,
+        mandatory: bool = ...,
+        cfg: str = ...,
     ) -> Attribute: ...
 
     @staticmethod
     def label_list(
-        allow_empty: bool = True,
-        default: Sequence[Union[Label, str]] = []
-        doc: str = "",
-        allow_files: Union[bool, Sequence[str]] = bool,
-        providers: Union[Sequence[Sequence[Provider]], Sequence[Provider]] = [],
-        mandatory: bool = False,
-        cfg: str = "target",
+        allow_empty: bool = ...,
+        default: Sequence[Union[Label, str]] = ...,
+        doc: str = ...,
+        allow_files: Union[bool, Sequence[str]] = ...,
+        providers: Union[Sequence[Sequence[Provider]], Sequence[Provider]] = ...,
+        mandatory: bool = ...,
+        cfg: str = ...,
     ) -> Attribute: ...
 
     @staticmethod
     def output(
-        doc: str = "",
-        mandatory: bool = False,
+        doc: str = ...,
+        mandatory: bool = ...,
     ) -> Attribute: ...
 
     @staticmethod
     def output_list(
-        allow_empty: bool = True,
-        doc: str = "",
-        mandatory: bool = False,
+        allow_empty: bool = ...,
+        doc: str = ...,
+        mandatory: bool = ...,
     ) -> Attribute: ...
 
     @staticmethod
     def string(
-        default: str = "",
-        doc: str = "",
-        mandatory: bool = False,
-        values: Sequence[str] = [],
+        default: str = ...,
+        doc: str = ...,
+        mandatory: bool = ...,
+        values: Sequence[str] = ...,
     ) -> Attribute: ...
 
     @staticmethod
     def string_dict(
-        allow_empty: bool = True,
-        default: Dict[str, str] = {},
-        doc: str = "",
-        mandatory: bool = False,
+        allow_empty: bool = ...,
+        default: Dict[str, str] = ...,
+        doc: str = ...,
+        mandatory: bool = ...,
     ) -> Attribute: ...
 
     @staticmethod
     def string_list(
-        mandatory: bool = False,
-        allow_empty: bool = True,
-        default: Sequence[str] = [],
-        doc: str = "",
+        mandatory: bool = ...,
+        allow_empty: bool = ...,
+        default: Sequence[str] = ...,
+        doc: str = ...,
     ) -> Attribute: ...
 
     @staticmethod
     def string_list_dict(
-        allow_empty: bool = True,
-        default: Dict[str, List[str]] = {},
-        doc: str = "",
-        mandatory: bool = False,
+        allow_empty: bool = ...,
+        default: Dict[str, List[str]] = ...,
+        doc: str = ...,
+        mandatory: bool = ...,
     ) -> Attribute: ...
 
 
