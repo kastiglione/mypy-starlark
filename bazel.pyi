@@ -112,7 +112,7 @@ class Actions:
 
 
 class Ctx:
-    actions = Actions
+    actions: Actions
 
     bin_dir: root
     genfiles_dir: root
