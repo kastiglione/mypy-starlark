@@ -151,8 +151,13 @@ class Actions:
     ) -> None: ...
 
 
-class Ctx:
+# https://docs.bazel.build/versions/master/skylark/lib/ctx.html
+Attr = TypeVar("Attr")
+
+class Ctx(Generic[Attr]):
     actions: Actions
+
+    attr: Attr
 
     bin_dir: root
     genfiles_dir: root
