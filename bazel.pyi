@@ -39,8 +39,48 @@ class depset(Generic[T]):
     def to_list(self) -> List[T]: ...
 
 
+# https://docs.bazel.build/versions/master/skylark/lib/Args.html
 class Args:
-    pass
+    def add(
+        arg_name_or_value: Union[str, T],
+        value: T,
+        *,
+        format: str = ...,
+    ) -> Args: ...
+
+    def add_all(
+        arg_name_or_values: Union[str, Sequence[T], depset[T]],
+        values: Union[Sequence[T], depset[T]],
+        *,
+        map_each: Callable[[T], Union[None, str, Sequence[str]]] = ...,
+        format_each: str = ...,
+        before_each: str = ...,
+        omit_if_empty: bool = ...,
+        uniquify: bool = ...,
+        expand_directories: bool = ...,
+        terminate_with: str = ...,
+    ) -> Args: ...
+
+    def add_joined(
+        arg_name_or_values: Union[str, Sequence[T], depset[T]],
+        values: Union[Sequence[T], depset[T]] = ...,
+        *,
+        join_with: str = ...,
+        map_each: Callable[[T], Union[None, str, Sequence[str]]] = ...,
+        format_each: str = ...,
+        format_joined: str = ...,
+        omit_if_empty: bool = ...,
+        uniquify: bool = ...,
+        expand_directories: bool = ...,
+    ) -> Args: ...
+
+    def set_param_file_format(format: str) -> Args: ...
+
+    def use_param_file(
+        param_file_arg: str,
+        *,
+        use_always: bool = ...,
+    ) -> Args: ...
 
 
 class Actions:
